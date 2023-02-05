@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const restaurantRouter = require('./routes/restrauntRoute');
+const SERVER_PORT = 8081;
 
 const app = express();
 app.use(express.json()); // Make sure it comes back as json
@@ -12,4 +13,12 @@ mongoose.connect('mongodb+srv://RK_02:ab8UjMGR44roYdJH@cluster0.iu4uasl.mongodb.
 
 app.use(restaurantRouter);
 
-app.listen(3000, () => { console.log('Server is running...') });
+
+app.route("/").get((req,res)=>{
+    res.send("<h1>Lab 03 MongoDB & Mongoose");
+})
+    
+
+app.listen(SERVER_PORT, () =>{
+  console.log(`Server running at http://localhost:${SERVER_PORT}/`)
+})
