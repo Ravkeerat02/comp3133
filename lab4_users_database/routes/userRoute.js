@@ -1,17 +1,20 @@
 const express = require('express');
-const userModel = require('../model/users')
+const userModel = require('../model/userModel');
 const app = express();
 
 
-//http://localhost:3000/users
-app.get('/user', async (request, response) => {
-    const users = await userModel.find({});
+// //http://localhost:3000/users
+app.post('/users', async (request, response) => {
+    const user = new userModel(request.body);
     try {
-      response.status(200).send(users);
+      await user.save();
+      response.status(201).send(user);
     } catch (err) {
       response.status(500).send(err);
     }
   });
+
+
 
 
 module.exports = app;
